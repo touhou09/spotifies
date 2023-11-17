@@ -12,7 +12,7 @@ public class MainMenu {
         SearchService searchService = new SearchService();
         PlaylistService playlistService = new PlaylistService();
         UserManager userManager = new UserManager();
-        UserService userService = new UserService(); // UserService 인스턴스 생성
+        UserService userService = new UserService();
 
         String userId = scanner.nextLine();
         System.out.println("Welcome to the Spotify CLI.");
@@ -45,6 +45,7 @@ public class MainMenu {
                     waitForEnter();
                     break;
                 case 3:
+                	System.out.print("Enter your target duration(s): ");
                     int duration = scanner.nextInt();
                     scanner.nextLine();
                     playlistService.createTimeBasedPlaylist(user, duration * 1000);
@@ -102,7 +103,5 @@ public class MainMenu {
             for (int i = 0; i < 100; i++) System.out.println();
         }
     }
-    
-
 }
 

@@ -1,28 +1,39 @@
 import java.sql.*;
+import java.util.*;
 
 public class PlaylistService {
-    public void createTimeBasedPlaylist(User user, int targetDuration) {
-        String getPlaylistSQL = "SELECT Title, Artist_Name, AlbumName, SUM(Duration) as TotalDuration " +
-                                "FROM (SELECT Title, Artist_Name, AlbumName, Duration FROM Songs ORDER BY DBMS_RANDOM.VALUE) " +
-                                "WHERE ROWNUM <= 10 " + 
-                                "GROUP BY Title, Artist_Name, AlbumName " +
-                                "HAVING SUM(Duration) <= ?";
+	public void createTimeBasedPlaylist(User user, int targetDuration) {
+	    List<String> playlist = new ArrayList<>();
+	    int accumulatedDuration = 0;
 
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(getPlaylistSQL)) {
-            
-            pstmt.setInt(1, targetDuration);
-            ResultSet rs = pstmt.executeQuery();
-            System.out.println("Your Playlist:");
-            while (rs.next()) {
-                System.out.println("Title: " + rs.getString("Title") + 
-                                   ", Artist: " + rs.getString("Artist_Name") + 
-                                   ", Album: " + rs.getString("AlbumName") + 
-                                   ", Duration: " + rs.getInt("TotalDuration"));
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}
+	    String getPlaylistSQL =
+	        " SELECT Songs.Title, art.Artist_Name, al.AlbumName, Songs.Duration " +
+	        " FROM Songs SAMPLE (0.01)" +
+	        " JOIN Album al ON Songs.AlbumID = al.AlbumID " +
+	        " JOIN Featured_Artists_and_Producers fap ON al.AlbumID = fap.AlbumID " +
+	        " JOIN Artist art ON fap.ArtistID = art.ArtistID";
+
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(getPlaylistSQL)) {
+	            
+	        ResultSet rs = pstmt.executeQuery();
+
+	        while (rs.next() && accumulatedDuration <= targetDuration) {
+	            int duration = rs.getInt("Duration");
+	            if (accumulatedDuration + duration <= targetDuration) {
+	                accumulatedDuration += duration;
+	                playlist.add(rs.getString("Title") + " - " + rs.getString("Artist_Name") + " - " + rs.getString("AlbumName"));
+	            }
+	        }
+	        rs.close();
+
+	        System.out.println("Your Playlist (Total Duration: " + accumulatedDuration + " seconds):");
+	        for (String song : playlist) {
+	            System.out.println(song);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+   }

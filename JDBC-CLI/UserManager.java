@@ -24,7 +24,7 @@ public class UserManager {
     }
 
     public void updateUserInfo(User user, String newEmail, String newRealName) {
-        String updateUserInfoSQL = "UPDATE Users SET Email = ?, RealName = ? WHERE UserID = ?";
+        String updateUserInfoSQL = "UPDATE Users SET Email = ?, Real_Name = ? WHERE UserID = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(updateUserInfoSQL)) {
             
