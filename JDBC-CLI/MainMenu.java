@@ -1,12 +1,14 @@
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
 //import java.sql.*;
 import java.util.Scanner;
 
 public class MainMenu {
 
     private static Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) {
+    //userID: 3, password: password3
+    public static void main(String[] args) throws IOException, ParseException, SQLException {
         //AuthenticationService authService = new AuthenticationService();
         ChartService chartService = new ChartService();
         SearchService searchService = new SearchService();
@@ -14,9 +16,8 @@ public class MainMenu {
         UserManager userManager = new UserManager();
         UserService userService = new UserService();
 
-        String userId = scanner.nextLine();
         System.out.println("Welcome to the Spotify CLI.");
-        User user = userService.getUser(userId);
+        User user = userService.login();
         if (user != null) {
             System.out.println("Login successful. Welcome, " + user.getUserName() + "!");
         } else {
@@ -25,7 +26,6 @@ public class MainMenu {
 
         boolean exit = false;
         while (!exit) {
-            clearScreen();
             printMainMenu();
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -52,11 +52,7 @@ public class MainMenu {
                     waitForEnter();
                     break;
                 case 4:
-                    System.out.print("Enter new Email: ");
-                    String newEmail = scanner.nextLine();
-                    System.out.print("Enter new Real Name: ");
-                    String newRealName = scanner.nextLine();
-                    userManager.updateUserInfo(user, newEmail, newRealName);
+                    userManager.updateUserInfo(user);
                     waitForEnter();
                     break;
                 case 5:
