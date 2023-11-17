@@ -6,7 +6,7 @@ public class ChartService {
         String createOrUpdateViewSQL = String.format(
             "CREATE OR REPLACE VIEW %s AS " +
             "SELECT s.Title, COUNT(*) as LikeCount " +
-            "FROM SongsLiked sl " +
+            "FROM Songs_Liked sl " +
             "JOIN Songs s ON sl.SongID = s.SongID " +
             "GROUP BY s.Title " +
             "ORDER BY COUNT(*) DESC", viewName);
