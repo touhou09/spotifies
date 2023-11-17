@@ -1,25 +1,27 @@
-import java.sql.*;
+import java.io.IOException;
+//import java.sql.*;
 import java.util.Scanner;
 
-public class Spotify {
+public class MainMenu {
 
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        AuthenticationService authService = new AuthenticationService();
+        //AuthenticationService authService = new AuthenticationService();
         ChartService chartService = new ChartService();
         SearchService searchService = new SearchService();
         PlaylistService playlistService = new PlaylistService();
         UserManager userManager = new UserManager();
+        UserService userService = new UserService(); // UserService 인스턴스 생성
 
+        String userId = scanner.nextLine();
         System.out.println("Welcome to the Spotify CLI.");
-        User user = authService.login();
-
-        if (user == null) {
-            System.out.println("Login failed. Please check your credentials.");
-            return;
+        User user = userService.getUser(userId);
+        if (user != null) {
+            System.out.println("Login successful. Welcome, " + user.getUserName() + "!");
+        } else {
+            System.out.println("Login failed. User ID not found.");
         }
-        System.out.println("Login successful.");
 
         boolean exit = false;
         while (!exit) {
@@ -27,23 +29,33 @@ public class Spotify {
             printMainMenu();
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // 버퍼 비우기
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    chartService.displayTopSongs();
+                	System.out.print("Enter timeframe to search: ");
+                	String timeFrame = scanner.nextLine();
+                    chartService.displayTopSongs(timeFrame);
                     waitForEnter();
                     break;
                 case 2:
-                    searchService.search();
+                    System.out.print("Enter keyword to search: ");
+                    String keyword = scanner.nextLine();
+                    searchService.search(keyword);
                     waitForEnter();
                     break;
                 case 3:
-                    playlistService.createTimeBasedPlaylist();
+                    int duration = scanner.nextInt();
+                    scanner.nextLine();
+                    playlistService.createTimeBasedPlaylist(user, duration * 1000);
                     waitForEnter();
                     break;
                 case 4:
-                    userManager.updateUserInfo();
+                    System.out.print("Enter new Email: ");
+                    String newEmail = scanner.nextLine();
+                    System.out.print("Enter new Real Name: ");
+                    String newRealName = scanner.nextLine();
+                    userManager.updateUserInfo(user, newEmail, newRealName);
                     waitForEnter();
                     break;
                 case 5:
@@ -59,13 +71,11 @@ public class Spotify {
         scanner.close();
     }
 
-    // Enter를 기다리는 메서드
     private static void waitForEnter() {
         System.out.println("\nPress Enter to continue...");
         scanner.nextLine();
     }
 
-    // 메인 메뉴 출력 메서드
     private static void printMainMenu() {
         System.out.println("**************** Spotify CLI ****************");
         System.out.println("*                                           *");
@@ -78,7 +88,6 @@ public class Spotify {
         System.out.println("*********************************************");
     }
 
-    // 화면 지우기 메서드
     private static void clearScreen() {
         try {
             final String os = System.getProperty("os.name");
@@ -90,8 +99,10 @@ public class Spotify {
                 System.out.flush();
             }
         } catch (IOException | InterruptedException ex) {
-            // 예외 처리, 혹은 대체 로직
-            for (int i = 0; i < 100; i++) System.out.println(); // 대체 로직
+            for (int i = 0; i < 100; i++) System.out.println();
         }
     }
+    
+
 }
+

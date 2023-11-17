@@ -1,3 +1,5 @@
+import java.sql.*;
+
 public class AuthenticationService {
     public User login(int userId, String password) {
         String loginSQL = "SELECT UserID, UserName, UserType FROM Users WHERE UserID = ? AND Password = ?";
@@ -8,7 +10,7 @@ public class AuthenticationService {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                return new User(rs.getInt("UserID"), rs.getString("UserName"), rs.getString("UserType"));
+                return new User(rs.getString("UserID"), rs.getString("UserName"));
             }
             rs.close();
         } catch (SQLException e) {
