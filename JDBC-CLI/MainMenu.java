@@ -9,7 +9,6 @@ public class MainMenu {
     private static Scanner scanner = new Scanner(System.in);
     //userID: 3, password: password3
     public static void main(String[] args) throws IOException, ParseException, SQLException {
-        //AuthenticationService authService = new AuthenticationService();
         ChartService chartService = new ChartService();
         SearchService searchService = new SearchService();
         PlaylistService playlistService = new PlaylistService();
