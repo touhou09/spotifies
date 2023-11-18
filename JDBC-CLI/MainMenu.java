@@ -24,48 +24,92 @@ public class MainMenu {
             System.out.println("Login failed. User ID not found.");
         }
 
+        
+        
+        
         boolean exit = false;
-        while (!exit) {
-            printMainMenu();
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+        
+        if (user != null && user.getEmail().contains("@Spotify")) {
+            System.out.println("Email contains '@Spotify'");
+            
+            
+            while (!exit) {
+            	printAdminMainMenu();
+                System.out.print("Enter your choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                	System.out.print("Enter timeframe to search: ");
-                	String timeFrame = scanner.nextLine();
-                    chartService.displayTopSongs(timeFrame);
-                    waitForEnter();
-                    break;
-                case 2:
-                    System.out.print("Enter keyword to search: ");
-                    String keyword = scanner.nextLine();
-                    searchService.search(keyword);
-                    waitForEnter();
-                    break;
-                case 3:
-                	System.out.print("Enter your target duration(s): ");
-                    int duration = scanner.nextInt();
-                    scanner.nextLine();
-                    playlistService.createTimeBasedPlaylist(user, duration * 1000);
-                    waitForEnter();
-                    break;
-                case 4:
-                    userManager.updateUserInfo(user);
-                    waitForEnter();
-                    break;
-                case 5:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid option. Please try again.");
-                    waitForEnter();
-                    break;
+                switch (choice) {
+                    case 1:
+                    	System.out.print("Enter timeframe to search: ");
+                    	String timeFrame = scanner.nextLine();
+                        chartService.displayTopSongs(timeFrame);
+                        waitForEnter();
+                        break;
+                    case 2:
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                        waitForEnter();
+                        break;
+                }
+            
+            
+            }
+            
+            
+        
+            
+        } else {
+            System.out.println("Email does not contain '@Spotify'");
+            
+            
+            
+            while (!exit) {
+                printMainMenu();
+                System.out.print("Enter your choice: ");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (choice) {
+                    case 1:
+                    	System.out.print("Enter timeframe to search: ");
+                    	String timeFrame = scanner.nextLine();
+                        chartService.displayTopSongs(timeFrame);
+                        waitForEnter();
+                        break;
+                    case 2:
+                        System.out.print("Enter keyword to search: ");
+                        String keyword = scanner.nextLine();
+                        searchService.search(keyword);
+                        waitForEnter();
+                        break;
+                    case 3:
+                    	System.out.print("Enter your target duration(s): ");
+                        int duration = scanner.nextInt();
+                        scanner.nextLine();
+                        playlistService.createTimeBasedPlaylist(user, duration * 1000);
+                        waitForEnter();
+                        break;
+                    case 4:
+                        userManager.updateUserInfo(user);
+                        waitForEnter();
+                        break;
+                    case 5:
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                        waitForEnter();
+                        break;
+                }
             }
         }
-        System.out.println("Thank you for using our service!");
-        scanner.close();
+            System.out.println("Thank you for using our service!");
+            scanner.close();
+            
+           
     }
 
     private static void waitForEnter() {
@@ -81,6 +125,18 @@ public class MainMenu {
         System.out.println("*  3. Create a Playlist                     *");
         System.out.println("*  4. Manage User Information               *");
         System.out.println("*  5. Exit                                  *");
+        System.out.println("*                                           *");
+        System.out.println("*********************************************");
+    }
+    
+    private static void printAdminMainMenu() {
+        System.out.println("**************** Spotify CLI ****************");
+        System.out.println("*                                           *");
+        System.out.println("*  1. Data inquiry                          *");
+       // System.out.println("*  2. Search                                *");
+       // System.out.println("*  3. Create a Playlist                     *");
+       // System.out.println("*  4. Manage User Information               *");
+        System.out.println("*  2. Exit                                  *");
         System.out.println("*                                           *");
         System.out.println("*********************************************");
     }
