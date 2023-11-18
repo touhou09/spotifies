@@ -27,21 +27,41 @@ public class UserManager {
         }
     }
 
-    public static void updateUserInfo(User user) {
-    	System.out.print(user);
+    public static void updateEmailInfo(User user) {
+    	//System.out.print(user);
     	
         System.out.print("Enter new Email: ");
         String newEmail = scanner.nextLine();
-        System.out.print("Enter new Real Name: ");
-        String newRealName = scanner.nextLine();
+       
     	
-        String updateUserInfoSQL = "UPDATE Users SET Email = ?, Real_Name = ? WHERE UserID = ?";
+        String updateUserInfoSQL = "UPDATE Users SET Email = ?  WHERE UserID = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(updateUserInfoSQL)) {
             
             pstmt.setString(1, newEmail);
-            pstmt.setString(2, newRealName);
-            pstmt.setString(3, user.getUserID());
+            pstmt.setString(2, user.getUserID());
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("User Email updated successfully.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void updatePasswordInfo(User user) {
+    	//System.out.print(user);
+    	
+        
+        System.out.print("Enter new Password: ");
+        String newPassword = scanner.nextLine();
+       
+        String updateUserInfoSQL = "UPDATE Users SET PASSWORD = ? WHERE UserID = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(updateUserInfoSQL)) {
+            
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, user.getUserID());
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("User information updated successfully.");

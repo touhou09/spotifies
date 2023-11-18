@@ -76,7 +76,33 @@ public class MainMenu {
                         waitForEnter();
                         break;
                     case 4:
-                    	UserManager.updateUserInfo(user);
+                    	 while (!exit) {
+	                    	System.out.print(user);
+	                    	
+	                    	printManageInformationMenu();
+	                        System.out.print("Enter your choice: ");
+	                        int choice2 = scanner.nextInt();
+	                        scanner.nextLine();
+	                        switch (choice2) {
+	                        case 1:
+	                        	UserManager.updateEmailInfo(user);
+	                            
+	                            break;
+	                        case 2:
+	                        	UserManager.updatePasswordInfo(user);
+	                        	exit = true;
+	                            
+	                            break;
+	                        case 3:
+	                        	exit = true;
+	                            
+	                            break;
+	                        default:
+	                            System.out.println("Invalid option. Please try again.");
+	                            
+	                            break;
+	                        }
+                        }
                         waitForEnter();
                         break;
                     case 5:
@@ -121,6 +147,19 @@ public class MainMenu {
        // System.out.println("*  3. Create a Playlist                     *");
        // System.out.println("*  4. Manage User Information               *");
         System.out.println("*  2. Statistics                            *");
+        System.out.println("*  3. Exit                                  *");
+        System.out.println("*                                           *");
+        System.out.println("*********************************************");
+    }
+    
+    private static void printManageInformationMenu() {
+        System.out.println("**************** Spotify CLI ****************");
+        System.out.println("*                                           *");
+        System.out.println("*  1. Edit EmailInfo                        *");
+        System.out.println("*  2. Edit PasswordInfo                     *");
+       // System.out.println("*  3. Create a Playlist                     *");
+       // System.out.println("*  4. Manage User Information               *");
+       // System.out.println("*  2. Statistics                            *");
         System.out.println("*  3. Exit                                  *");
         System.out.println("*                                           *");
         System.out.println("*********************************************");
