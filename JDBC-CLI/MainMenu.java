@@ -71,10 +71,8 @@ public class MainMenu {
                         waitForEnter();
                         break;
                     case 3:
-                    	System.out.print("Enter your target duration(s): ");
-                        int duration = scanner.nextInt();
-                        scanner.nextLine();
-                        playlistService.createTimeBasedPlaylist(user, duration * 1000);
+                    	
+                        playlistService.createTimeBasedPlaylist(user);
                         waitForEnter();
                         break;
                     case 4:
