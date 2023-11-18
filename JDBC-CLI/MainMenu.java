@@ -76,7 +76,8 @@ public class MainMenu {
                         waitForEnter();
                         break;
                     case 4:
-                    	 while (!exit) {
+                    	Boolean done = false;
+                    	while (!done) {
 	                    	System.out.print(user);
 	                    	
 	                    	printManageInformationMenu();
@@ -90,16 +91,12 @@ public class MainMenu {
 	                            break;
 	                        case 2:
 	                        	UserManager.updatePasswordInfo(user);
-	                        	exit = true;
-	                            
 	                            break;
 	                        case 3:
-	                        	exit = true;
-	                            
+	                        	done = true;
 	                            break;
 	                        default:
 	                            System.out.println("Invalid option. Please try again.");
-	                            
 	                            break;
 	                        }
                         }
@@ -117,15 +114,13 @@ public class MainMenu {
         }
             System.out.println("Thank you for using our service!");
             scanner.close();
-            
-           
     }
 
     private static void waitForEnter() {
         System.out.println("\nPress Enter to continue...");
         scanner.nextLine();
     }
-
+    
     private static void printMainMenu() {
         System.out.println("**************** Spotify CLI ****************");
         PopularGenre.DisplayPopularGenre();
@@ -139,27 +134,21 @@ public class MainMenu {
         System.out.println("*********************************************");
     }
     
-    private static void printAdminMainMenu() {
-        System.out.println("**************** Spotify CLI ****************");
-        System.out.println("*                                           *");
-        System.out.println("*  1. Data inquiry                          *");
-       // System.out.println("*  2. Search                                *");
-       // System.out.println("*  3. Create a Playlist                     *");
-       // System.out.println("*  4. Manage User Information               *");
-        System.out.println("*  2. Statistics                            *");
-        System.out.println("*  3. Exit                                  *");
-        System.out.println("*                                           *");
-        System.out.println("*********************************************");
-    }
-    
     private static void printManageInformationMenu() {
         System.out.println("**************** Spotify CLI ****************");
         System.out.println("*                                           *");
         System.out.println("*  1. Edit EmailInfo                        *");
         System.out.println("*  2. Edit PasswordInfo                     *");
-       // System.out.println("*  3. Create a Playlist                     *");
-       // System.out.println("*  4. Manage User Information               *");
-       // System.out.println("*  2. Statistics                            *");
+        System.out.println("*  3. Exit                                  *");
+        System.out.println("*                                           *");
+        System.out.println("*********************************************");
+    }
+    
+    private static void printAdminMainMenu() {
+        System.out.println("**************** Spotify CLI ****************");
+        System.out.println("*                                           *");
+        System.out.println("*  1. Admin Dashboard                       *");
+        System.out.println("*  2. Search + Users                        *");
         System.out.println("*  3. Exit                                  *");
         System.out.println("*                                           *");
         System.out.println("*********************************************");
