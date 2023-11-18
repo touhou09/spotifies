@@ -9,9 +9,9 @@ import java.util.Random;
 public class UserService {
 
     private static Scanner scanner = new Scanner(System.in);
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public User registerUser() throws IOException, ParseException, SQLException {
+    public static User registerUser() throws IOException, ParseException, SQLException {
     	// 101 / user101 / User 101 / user101@example.com / password101 / Male / 2020-01-01 / Location 101 / DE
     	
         System.out.println("[Starting Registration..]");
@@ -124,12 +124,12 @@ public class UserService {
         return newUser;
     }
     
-    private int generateRandomUserID() {
+    private static int generateRandomUserID() {
         Random random = new Random();
         return random.nextInt(200);
     }
     
-    private boolean userIDExists(int userID) {
+    private static boolean userIDExists(int userID) {
         String sql = "SELECT COUNT(*) FROM Users WHERE UserID = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -146,7 +146,7 @@ public class UserService {
     }
     
     
-    private boolean userNameExists(String userName) {
+    private static boolean userNameExists(String userName) {
         String sql = "SELECT COUNT(*) FROM Users WHERE USERNAME = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -163,7 +163,7 @@ public class UserService {
     }
     
     
-    public Boolean checkAdmin(User user) {
+    public static Boolean checkAdmin(User user) {
     	String sql = "SELECT A.USERID" +
     	" FROM USERS A" +
     	" WHERE EXISTS" + 
@@ -184,7 +184,7 @@ public class UserService {
     }
     
     
-    public User login() throws IOException, ParseException, SQLException {
+    public static User login() throws IOException, ParseException, SQLException {
     	
         while (true) {
         	

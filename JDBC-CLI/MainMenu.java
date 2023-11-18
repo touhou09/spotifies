@@ -9,17 +9,11 @@ public class MainMenu {
     private static Scanner scanner = new Scanner(System.in);
     //userID: 3, password: password3
     public static void main(String[] args) throws IOException, ParseException, SQLException {
-        ChartService chartService = new ChartService();
-        SearchService searchService = new SearchService();
-        PlaylistService playlistService = new PlaylistService();
-        UserManager userManager = new UserManager();
-        UserService userService = new UserService();
-
         System.out.println("Welcome to the Spotify CLI.");
-        User user = userService.login();
+        User user = UserService.login();
         
         if (user != null) {
-        	user.setAdmin(userService.checkAdmin(user));
+        	user.setAdmin(UserService.checkAdmin(user));
             System.out.println("Login successful. Welcome, " + user.getUserName() + "!");
         } else {
             System.out.println("Login failed. User ID not found.");
@@ -40,7 +34,7 @@ public class MainMenu {
                     case 1:
                     	System.out.print("Enter timeframe to search: ");
                     	String timeFrame = scanner.nextLine();
-                        chartService.displayTopSongs(timeFrame);
+                    	ChartService.displayTopSongs(timeFrame);
                         waitForEnter();
                         break;
                     case 2:
@@ -48,6 +42,9 @@ public class MainMenu {
                     	waitForEnter();
                     	break;
                     case 3:
+                    	SearchService.adminSearch();
+                    	waitForEnter();
+                    case 4:
                         exit = true;
                         break;
                     default:
@@ -67,19 +64,19 @@ public class MainMenu {
                     case 1:
                     	System.out.print("Enter timeframe to search: ");
                     	String timeFrame = scanner.nextLine();
-                        chartService.displayTopSongs(timeFrame);
+                    	ChartService.displayTopSongs(timeFrame);
                         waitForEnter();
                         break;
                     case 2:
-                        searchService.search();
+                    	SearchService.search();
                         waitForEnter();
                         break;
                     case 3:
-                        playlistService.createTimeBasedPlaylist(user);
+                    	PlaylistService.createTimeBasedPlaylist(user);
                         waitForEnter();
                         break;
                     case 4:
-                        userManager.updateUserInfo(user);
+                    	UserManager.updateUserInfo(user);
                         waitForEnter();
                         break;
                     case 5:

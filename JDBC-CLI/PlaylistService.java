@@ -3,11 +3,8 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-
-
 public class PlaylistService {
-    public void createTimeBasedPlaylist(User user) {
+    public static void createTimeBasedPlaylist(User user) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your target duration(s): ");
         int targetDuration = scanner.nextInt();
@@ -94,14 +91,14 @@ public class PlaylistService {
 
 
 
-	private int generateRandomID() {
+	private static int generateRandomID() {
 	    Random random = new Random();
 	    return random.nextInt(200);  
 	}
 
 
 
-	private boolean IDExists(int userID) {
+	private static boolean IDExists(int userID) {
 	    String sql = "SELECT COUNT(*) FROM PLAYLIST WHERE playlistID = ?";
 	    try (Connection conn = DatabaseConnection.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql)) {

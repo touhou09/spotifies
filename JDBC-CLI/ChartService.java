@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class ChartService {
-    public void displayTopSongs(String timeFrame) {
+    public static void displayTopSongs(String timeFrame) {
         String viewName = "TopSongsView_" + timeFrame;
         String createOrUpdateViewSQL = String.format(
             "CREATE OR REPLACE VIEW %s AS " +

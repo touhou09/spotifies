@@ -27,7 +27,7 @@ public class UserManager {
         }
     }
 
-    public void updateUserInfo(User user) {
+    public static void updateUserInfo(User user) {
     	System.out.print(user);
     	
         System.out.print("Enter new Email: ");
