@@ -10,10 +10,11 @@ public class User {
     private Date dateOfBirth;
     private String location;
     private String nationality;
+    private Boolean admin;
 
     // Constructor
     public User(String userID, String userName, String realName, String email,
-                String password, String gender, Date dateOfBirth, String location, String nationality) {
+                String password, String gender, Date dateOfBirth, String location, String nationality, Boolean admin) {
         this.userID = userID;
         this.userName = userName;
         this.realName = realName;
@@ -23,6 +24,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.location = location;
         this.nationality = nationality;
+        this.admin = admin;
     }
 
     // Getters and Setters
@@ -51,7 +53,10 @@ public class User {
     public void setLocation(String location) { this.location = location; }
     
     public String getNationality() { return nationality; }
-    public void setNationality(String nationality) { this.nationality = nationality; }
+    public void setNationality(String nationality) { this.nationality = nationality; }    
+    
+    public Boolean getAdmin() { return admin; }
+    public void setAdmin(Boolean admin) { this.admin = admin; }
 
     // Overriding the toString() method for debugging purposes
     @Override

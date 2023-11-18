@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.*;
 /*
 
@@ -37,18 +40,18 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SearchService {
-
-    public void search(String keyword) {
-
+	
+    private static Scanner scanner = new Scanner(System.in);
+    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    
+    public void search() throws IOException {
         System.out.println("Select option for searching:");
         System.out.println("1. Song");
         System.out.println("2. Album");
         System.out.println("3. Artist");
         System.out.println("4. Genre - Artist");
-
-        Scanner scanner_s = new Scanner(System.in);
-        int searchOption = scanner_s.nextInt();
-
+        int searchOption = scanner.nextInt();
+        
         String searchSQL = "";
 
         switch (searchOption) {
@@ -62,18 +65,24 @@ public class SearchService {
                 searchSQL = "SELECT 'Artist' as Type, Artist_Name FROM Artist WHERE Artist_Name LIKE ?";
                 break;
             case 4:
-            	searchSQL = "SELECT inview.Artist_Name, inview.AlbumCount"
-            			+ "	FROM ("
-            			+ "	SELECT A.Artist_Name, COUNT(Al.AlbumID) AS AlbumCount"
-            			+ "	FROM Artist A"
-            			+ "	JOIN Featured_Artists_and_Producers F ON A.ArtistID = F.ArtistID"
-            			+ "	JOIN Album Al ON F.AlbumID = Al.AlbumID"
-            			+ "	WHERE A.Genre LIKE ?"
-            			+ "	GROUP BY A.Artist_Name) inview;";
+                searchSQL = "SELECT inview.Artist_Name, inview.AlbumCount "
+                        + "FROM ( "
+                        + "SELECT A.Artist_Name, COUNT(Al.AlbumID) AS AlbumCount "
+                        + "FROM Artist A "
+                        + "JOIN Featured_Artists_and_Producers F ON A.ArtistID = F.ArtistID "
+                        + "JOIN Album Al ON F.AlbumID = Al.AlbumID "
+                        + "WHERE A.Genre LIKE ? "
+                        + "GROUP BY A.Artist_Name) inview "
+                        + "ORDER BY AlbumCount DESC "
+                        + "FETCH FIRST 10 ROWS ONLY";
+                break;
             default:
                 System.out.println("Invalid Option.");
                 return;
         }
+        
+    	System.out.print("Enter keyword to search: ");
+        String keyword = reader.readLine();
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(searchSQL)) {
@@ -89,8 +98,8 @@ public class SearchService {
                 } else if (searchOption == 3) {
                     System.out.println(rs.getString("Type") + ": " + rs.getString("Artist_Name"));
                 } else if (searchOption == 4) {
-                	System.out.println(rs.getString("inview.Artist_Name") +" with albums of:" +
-                			rs.getString("inview.AlbumCount"));
+                    System.out.println(rs.getString("Artist_Name") +" with albums of:" +
+                            rs.getString("AlbumCount"));
                 } else {
                     System.out.println("Invalid Option.");
                 }

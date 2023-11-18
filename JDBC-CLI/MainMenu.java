@@ -18,20 +18,18 @@ public class MainMenu {
 
         System.out.println("Welcome to the Spotify CLI.");
         User user = userService.login();
+        
         if (user != null) {
+        	user.setAdmin(userService.checkAdmin(user));
             System.out.println("Login successful. Welcome, " + user.getUserName() + "!");
         } else {
             System.out.println("Login failed. User ID not found.");
         }
 
-        
-        
-        
         boolean exit = false;
         
-        if (user != null && user.getEmail().contains("@Spotify")) {
-            System.out.println("Email contains '@Spotify'");
-            
+        if (user.getAdmin()) {
+            System.out.println("Entering admin menu..");
             
             while (!exit) {
             	printAdminMainMenu();
@@ -54,18 +52,8 @@ public class MainMenu {
                         waitForEnter();
                         break;
                 }
-            
-            
             }
-            
-            
-        
-            
         } else {
-            System.out.println("Email does not contain '@Spotify'");
-            
-            
-            
             while (!exit) {
                 printMainMenu();
                 System.out.print("Enter your choice: ");
@@ -80,9 +68,7 @@ public class MainMenu {
                         waitForEnter();
                         break;
                     case 2:
-                        System.out.print("Enter keyword to search: ");
-                        String keyword = scanner.nextLine();
-                        searchService.search(keyword);
+                        searchService.search();
                         waitForEnter();
                         break;
                     case 3:
@@ -139,21 +125,6 @@ public class MainMenu {
         System.out.println("*  2. Exit                                  *");
         System.out.println("*                                           *");
         System.out.println("*********************************************");
-    }
-
-    private static void clearScreen() {
-        try {
-            final String os = System.getProperty("os.name");
-            if (os.contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                Runtime.getRuntime().exec("clear");
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
-            }
-        } catch (IOException | InterruptedException ex) {
-            for (int i = 0; i < 100; i++) System.out.println();
-        }
     }
 }
 
