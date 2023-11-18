@@ -18,7 +18,7 @@ public class PopularGenre {
                 String genre = rs.getString("Genre");
                 int artistCount = rs.getInt("ArtistCount");
 
-                System.out.println("Genre: " + genre + ", Artist Count: " + artistCount);
+                System.out.println("* " + genre + " with " + artistCount + " artists *");
             }
             rs.close();
         } catch (SQLException e) {

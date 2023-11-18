@@ -71,7 +71,6 @@ public class MainMenu {
                         waitForEnter();
                         break;
                     case 3:
-                    	
                         playlistService.createTimeBasedPlaylist(user);
                         waitForEnter();
                         break;
@@ -102,6 +101,7 @@ public class MainMenu {
 
     private static void printMainMenu() {
         System.out.println("**************** Spotify CLI ****************");
+        PopularGenre.DisplayPopularGenre();
         System.out.println("*                                           *");
         System.out.println("*  1. Display Top Songs                     *");
         System.out.println("*  2. Search                                *");
