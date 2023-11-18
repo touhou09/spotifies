@@ -40,10 +40,11 @@ public class SearchService {
 
     public void search(String keyword) {
 
-        System.out.println("검색할 대상을 선택하세요:");
+        System.out.println("Select option for searching:");
         System.out.println("1. Song");
         System.out.println("2. Album");
         System.out.println("3. Artist");
+        System.out.println("4. Genre - Artist");
 
         Scanner scanner_s = new Scanner(System.in);
         int searchOption = scanner_s.nextInt();
@@ -60,8 +61,17 @@ public class SearchService {
             case 3:
                 searchSQL = "SELECT 'Artist' as Type, Artist_Name FROM Artist WHERE Artist_Name LIKE ?";
                 break;
+            case 4:
+            	searchSQL = "SELECT inview.Artist_Name, inview.AlbumCount"
+            			+ "	FROM ("
+            			+ "	SELECT A.Artist_Name, COUNT(Al.AlbumID) AS AlbumCount"
+            			+ "	FROM Artist A"
+            			+ "	JOIN Featured_Artists_and_Producers F ON A.ArtistID = F.ArtistID"
+            			+ "	JOIN Album Al ON F.AlbumID = Al.AlbumID"
+            			+ "	WHERE A.Genre LIKE ?"
+            			+ "	GROUP BY A.Artist_Name) inview;";
             default:
-                System.out.println("유효하지 않은 검색 옵션입니다.");
+                System.out.println("Invalid Option.");
                 return;
         }
 
@@ -78,8 +88,11 @@ public class SearchService {
                     System.out.println(rs.getString("Type") + ": " + rs.getString("AlbumName"));
                 } else if (searchOption == 3) {
                     System.out.println(rs.getString("Type") + ": " + rs.getString("Artist_Name"));
+                } else if (searchOption == 4) {
+                	System.out.println(rs.getString("inview.Artist_Name") +" with albums of:" +
+                			rs.getString("inview.AlbumCount"));
                 } else {
-                    System.out.println("유효하지 않은 검색 옵션입니다.");
+                    System.out.println("Invalid Option.");
                 }
             }
             rs.close();
