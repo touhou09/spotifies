@@ -22,7 +22,7 @@ public class MainMenu {
         	user.setAdmin(userService.checkAdmin(user));
             System.out.println("Login successful. Welcome, " + user.getUserName() + "!");
         } else {
-            System.out.println("Login failed. User ID not found.");
+            System.out.println("Login failed. User Name not found.");
         }
 
         boolean exit = false;
