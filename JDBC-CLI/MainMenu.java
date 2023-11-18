@@ -44,6 +44,10 @@ public class MainMenu {
                         waitForEnter();
                         break;
                     case 2:
+                    	AdminDashboard.displayStats();
+                    	waitForEnter();
+                    	break;
+                    case 3:
                         exit = true;
                         break;
                     default:
@@ -119,7 +123,8 @@ public class MainMenu {
        // System.out.println("*  2. Search                                *");
        // System.out.println("*  3. Create a Playlist                     *");
        // System.out.println("*  4. Manage User Information               *");
-        System.out.println("*  2. Exit                                  *");
+        System.out.println("*  2. Statistics                            *");
+        System.out.println("*  3. Exit                                  *");
         System.out.println("*                                           *");
         System.out.println("*********************************************");
     }
