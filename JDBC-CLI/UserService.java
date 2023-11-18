@@ -188,17 +188,19 @@ public class UserService {
     	
         while (true) {
         	
-            System.out.print("Enter your user ID(0 for registering): ");
-            String userId = scanner.nextLine();
-            if ("0".equals(userId)) {
+            System.out.print("Enter your userName(0 for registering): ");
+            String userName = scanner.nextLine();
+            
+            
+            if ("0".equals(userName)) {
                 registerUser();
                 continue; 
             }
-            String sql = "SELECT * FROM Users WHERE UserID = ?";
+            String sql = "SELECT * FROM Users WHERE USERNAME = ?";
             try (Connection conn = DatabaseConnection.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-                pstmt.setString(1, userId);
+                pstmt.setString(1, userName);
                 ResultSet rs = pstmt.executeQuery();
 
                 if (rs.next()) {
@@ -218,7 +220,7 @@ public class UserService {
                         System.out.println("Login failed: Incorrect password.");
                     }
                 } else {
-                    System.out.println("Login failed: User ID does not exist.");
+                    System.out.println("Login failed: User Name does not exist.");
                 }
                 rs.close();
             } catch (SQLException e) {
