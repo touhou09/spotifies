@@ -17,8 +17,11 @@ public class PopularGenre {
             while (rs.next()) {
                 String genre = rs.getString("Genre");
                 int artistCount = rs.getInt("ArtistCount");
-
-                System.out.println("* " + genre + " with " + artistCount + " artists *");
+                
+                
+                String output = String.format("* %-41s *", genre + " with " + artistCount + " artists");
+                System.out.println(output);
+                
             }
             rs.close();
         } catch (SQLException e) {

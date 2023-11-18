@@ -22,17 +22,34 @@ public class UserService {
         int userID2;
         while (true) {
             userID2 = generateRandomUserID();
-            System.out.println("FAIL "+ userID2 +" already exists ");
+            
             if (!userIDExists(userID2)) {
             	System.out.println("Success!! "+ userID2 +" make ");
                 break;
+            }else {
+            	
+            	System.out.println("FAIL "+ userID2 +" already exists ");
             }
         }
         String userID = String.valueOf(userID2);
         
         
-        System.out.print("Enter user name: ");
-        String userName = reader.readLine();
+        String userName;
+        while (true) {
+        	System.out.print("Enter user name: ");
+        	userName = reader.readLine();
+            
+            if (!userNameExists(userName)) {
+            	System.out.println("ID duplicate check completed!!");
+                break;
+            }else {
+            	System.out.println("FAIL "+ userName +" already exists ");
+            	
+            }
+        }
+        
+        
+       
      
         System.out.print("Enter real name: ");
         //String realName = reader.readLine();
@@ -117,6 +134,23 @@ public class UserService {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, userID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+    private boolean userNameExists(String userName) {
+        String sql = "SELECT COUNT(*) FROM Users WHERE USERNAME = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, userName);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1) > 0;
