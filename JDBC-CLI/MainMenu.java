@@ -44,6 +44,7 @@ public class MainMenu {
                     case 3:
                     	SearchService.adminSearch();
                     	waitForEnter();
+                    	break;
                     case 4:
                         exit = true;
                         break;
@@ -147,9 +148,10 @@ public class MainMenu {
     private static void printAdminMainMenu() {
         System.out.println("**************** Spotify CLI ****************");
         System.out.println("*                                           *");
-        System.out.println("*  1. Admin Dashboard                       *");
-        System.out.println("*  2. Search + Users                        *");
-        System.out.println("*  3. Exit                                  *");
+        System.out.println("*  1. Display Top Songs                     *");
+        System.out.println("*  2. Admin Dashboard                       *");
+        System.out.println("*  3. Search + Users                        *");
+        System.out.println("*  4. Exit                                  *");
         System.out.println("*                                           *");
         System.out.println("*********************************************");
     }
