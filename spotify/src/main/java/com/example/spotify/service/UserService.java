@@ -4,6 +4,7 @@ import com.example.spotify.model.User;
 import com.example.spotify.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -17,14 +18,14 @@ public class UserService {
         }
         return null;
     }
-
+    @Transactional
     public User register(User newUser) {
         if (userRepository.existsByUsername(newUser.getUserName())) {
             return null;
         }
         return userRepository.save(newUser);
     }
-
+    @Transactional
     public User updateUserInfo(User updatedUser) {
         if (userRepository.existsByUsername(updatedUser.getUserName())) {
             return userRepository.update(updatedUser);
