@@ -25,8 +25,8 @@ public class PlaylistController {
         playlistService.createEmptyPlaylist(playlistName, userId);
     }
 
-    @DeleteMapping("/delete")
-    public void deletePlaylist(@RequestParam int playlistId) {
+    @DeleteMapping("/delete/{playlistId}")
+    public void deletePlaylist(@PathVariable int playlistId) {
         playlistService.deletePlaylist(playlistId);
     }
 
