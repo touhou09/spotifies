@@ -20,4 +20,8 @@ public class ChartService {
         String viewName = "TopSongsView_" + timeFrame;
         return chartRepository.getTopSongs(viewName);
     }
+
+    public List<Map<String, Object>> displayTopFollowed() {
+        return chartRepository.getTopFollowed();
+    }
 }

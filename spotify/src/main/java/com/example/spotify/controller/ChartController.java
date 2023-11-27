@@ -22,4 +22,9 @@ public class ChartController {
     public List<Map<String, Object>> getTopSongs(@PathVariable String timeFrame) {
         return chartService.displayTopSongs(timeFrame);
     }
+
+    @GetMapping("/charts/top-followed")
+    public List<Map<String, Object>> getTopFollowed() {
+        return chartService.displayTopFollowed();
+    }
 }

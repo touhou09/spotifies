@@ -31,4 +31,15 @@ public class ChartRepository {
 
         return jdbcTemplate.queryForList(selectFromViewSQL);
     }
+
+    public List<Map<String, Object>> getTopFollowed() {
+        String query = "SELECT A.Artist_Name, COUNT(F.UserID) AS FollowerCount " +
+                "FROM Artist A " +
+                "JOIN Followed F ON A.ArtistID = F.ArtistID " +
+                "GROUP BY A.Artist_Name " +
+                "ORDER BY COUNT(F.UserID) DESC " +
+                "FETCH FIRST 10 ROWS ONLY";
+
+        return jdbcTemplate.queryForList(query);
+    }
 }

@@ -1,3 +1,9 @@
+
+/**
+ * Chart service는 follow chart랑 top song이랑 같은 class내의 다른 method로 처리
+ *
+ */
+
 import java.sql.*;
 
 public class FollowChartService {
