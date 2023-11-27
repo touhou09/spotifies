@@ -43,12 +43,9 @@ public class PlaylistService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
 
         // PlaylistID 고정값 설정
-        
-        
-        
+
         int playlistID;
         while (true) {
         	playlistID = generateRandomID();
@@ -87,16 +84,10 @@ public class PlaylistService {
         }
     }
 
-
-
-
-
 	private static int generateRandomID() {
 	    Random random = new Random();
-	    return random.nextInt(200);  
+	    return random.nextInt(200);
 	}
-
-
 
 	private static boolean IDExists(int userID) {
 	    String sql = "SELECT COUNT(*) FROM PLAYLIST WHERE playlistID = ?";
