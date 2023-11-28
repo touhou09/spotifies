@@ -42,5 +42,11 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/{userId}")
+    public User getUser(@PathVariable String userId) {
+        return userService.getUser(userId);
+    }
+
 }
 

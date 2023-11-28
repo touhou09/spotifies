@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -18,6 +19,7 @@ public class UserService {
         }
         return null;
     }
+
     @Transactional
     public User register(User newUser) {
         if (userRepository.existsByUsername(newUser.getUserName())) {
@@ -32,5 +34,10 @@ public class UserService {
         }
         return null;
     }
+
+    public User getUser(String userId) {
+        return userRepository.getUser(userId);
+    }
+
 }
 
