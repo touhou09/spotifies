@@ -79,6 +79,16 @@ public class PlaylistRepository {
         jdbcTemplate.update(deletePlaylistSQL, playlistId);
     }
 
+    public int incrementLikedCount(int playlistId) {
+        String sql = "UPDATE playlist SET LIKEDCOUNT = LIKEDCOUNT + 1 WHERE PLAYLISTID = ?";
+        return jdbcTemplate.update(sql, playlistId);
+    }
+
+    public int decrementLikedCount(int playlistId) {
+        String sql = "UPDATE playlist SET LIKEDCOUNT = LIKEDCOUNT - 1 WHERE PLAYLISTID = ?";
+        return jdbcTemplate.update(sql, playlistId);
+    }
+
     // time-based playlist methods
 
     private int generateRandomID() {

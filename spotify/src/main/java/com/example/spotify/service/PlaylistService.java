@@ -24,5 +24,13 @@ public class PlaylistService {
         playlistRepository.deletePlaylist(playlistId);
     }
 
+    public int incrementLikedCount(int playlistId) {
+        return playlistRepository.incrementLikedCount(playlistId);
+    }
+
+    public int decrementLikedCount(int playlistId) {
+        return playlistRepository.decrementLikedCount(playlistId);
+    }
+
 }
 

@@ -30,4 +30,16 @@ public class PlaylistController {
         playlistService.deletePlaylist(playlistId);
     }
 
+    @PostMapping("/incrementLikedCount")
+    public String incrementLikedCount(@RequestParam int playlistId) {
+        int rows = playlistService.incrementLikedCount(playlistId);
+        return rows > 0 ? "Incremented liked count successfully" : "Increment failed";
+    }
+
+    @PostMapping("/decrementLikedCount")
+    public String decrementLikedCount(@RequestParam int playlistId) {
+        int rows = playlistService.decrementLikedCount(playlistId);
+        return rows > 0 ? "Decremented liked count successfully" : "Decrement failed";
+    }
+
 }
