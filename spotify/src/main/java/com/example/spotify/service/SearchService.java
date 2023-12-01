@@ -1,0 +1,26 @@
+package com.example.spotify.service;
+
+import com.example.spotify.model.SearchResult;
+import com.example.spotify.repository.SearchRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class SearchService {
+    @Autowired
+    private SearchRepository searchRepository;
+
+    public List<SearchResult> searchSong(String keyword) {
+        return searchRepository.searchSong(keyword);
+    }
+
+    public List<SearchResult> searchAlbum(String keyword) {
+        return searchRepository.searchAlbum(keyword);
+    }
+
+    public List<SearchResult> searchArtist(String keyword) {
+        return searchRepository.searchArtist(keyword);
+    }
+}

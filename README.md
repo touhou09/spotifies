@@ -60,3 +60,21 @@
 9. **Get Top Followed**
     - Endpoint: `GET /top-followed`
     - Response: 가장 많이 팔로우 받은 사용자 리스트 (Map 형태)
+
+## SearchController
+* Base URL: `/search`
+
+1. **Search Song**
+   - Endpoint: `GET /song`
+   - Parameters: `keyword` (String)
+   - Response: 노래 검색 결과 List (SearchResult 객체를 항목으로 가짐)
+
+2. **Search Album**
+   - Endpoint: `GET /album`
+   - Parameters: `keyword` (String)
+   - Response: 앨범 검색 결과 List (SearchResult 객체를 항목으로 가짐)
+
+3. **Search Artist**
+   - Endpoint: `GET /artist`
+   - Parameters: `keyword` (String)
+   - Response: 아티스트 검색 결과 List (SearchResult 객체를 항목으로 가짐)
