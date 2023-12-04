@@ -15,6 +15,11 @@ spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 
 - 외부 데이터베이스에 연결해서 사용했으므로 실제로는 url을 localhost로 수정해야한다
 
+- 
+# 실행시 주의사항
+프로그램 실행시 http://localhost:8080/loginpage.html 페이지에서 시작한다.
+일반 user 의 아이디는 user1,2,3 비밀번호는 password1,2,3 이다.
+관리자의 아이디는 aa 비밀번호는 aaaaa 이다.
 
 # API List
 
