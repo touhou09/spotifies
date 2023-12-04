@@ -18,7 +18,9 @@ spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 - 
 # 실행시 주의사항
 프로그램 실행시 http://localhost:8080/loginpage.html 페이지에서 시작한다.
+
 일반 user 의 아이디는 user1,2,3 비밀번호는 password1,2,3 이다.
+
 관리자의 아이디는 aa 비밀번호는 aaaaa 이다.
 
 # API List
