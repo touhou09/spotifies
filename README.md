@@ -9,10 +9,10 @@
 ## db setting
 - 아래와 같은 환경에서 개발함
 
-spring.datasource.url=jdbc:oracle:thin:@14.56.195.170:1521:orcl
-spring.datasource.username=spotify
-spring.datasource.password=oracle
-spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@14.56.195.170:1521:orcl  
+spring.datasource.username=spotify  
+spring.datasource.password=oracle  
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver  
 
 - 외부 데이터베이스에 연결해서 사용했으므로 실제로는 url을 localhost로 수정해야한다
 
