@@ -25,8 +25,8 @@ spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 
 # API List
 
-    ## UserController
-    * Base URL: `/users`
+## UserController
+* Base URL: `/users`
     
     1. **Login**
         - Endpoint: `POST /login`
