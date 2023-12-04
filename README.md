@@ -16,6 +16,11 @@ spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 
 - 외부 데이터베이스에 연결해서 사용했으므로 실제로는 url을 localhost로 수정해야한다
 
+# Flowchart
+ppt에 같이 제출된 flowchart는 녹색표시된 부분이 완성시킨 부분 
+
+파란색은 하드코딩한 부분 검정색은 미구현의 부분 빨간색은 제대로 동작이 되지 않는 부분이다.
+
  
 # 실행시 주의사항
 프로그램 실행시 http://localhost:8080/loginpage.html 페이지에서 시작한다.
