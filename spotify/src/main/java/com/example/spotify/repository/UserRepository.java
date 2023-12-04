@@ -3,12 +3,9 @@ package com.example.spotify.repository;
 import com.example.spotify.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +19,6 @@ public class UserRepository {
     public UserRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
 
     public User findByUsername(String userName) {
         String sql = "SELECT * FROM Users WHERE UserName = ?";
@@ -77,6 +73,5 @@ public class UserRepository {
         String searchSQL = "SELECT * FROM USERS WHERE USERNAME LIKE ? or REAL_NAME LIKE ?";
         return jdbcTemplate.query(searchSQL, new Object[]{"%" + keyword + "%", "%" + keyword + "%"}, new UserMapper.UserRowMapper());
     }
-
 }
 

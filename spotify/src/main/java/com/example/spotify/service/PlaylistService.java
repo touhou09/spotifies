@@ -1,4 +1,5 @@
 package com.example.spotify.service;
+import com.example.spotify.model.Playlist;
 import com.example.spotify.repository.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,11 @@ public class PlaylistService {
         this.playlistRepository = playlistRepository;
     }
 
-    public void createTimeBasedPlaylist(int targetDuration, String playlistName, String userId) {
+    public Playlist createTimeBasedPlaylist(int targetDuration, String playlistName, String userId) {
         playlistRepository.createTimeBasedPlaylist(targetDuration, playlistName, userId);
+
+        return new Playlist(targetDuration, 0); // 예시입니다. 실제 플레이리스트 ID와 관련 정보를 기반으로 객체 생성
+
     }
 
     public void createEmptyPlaylist(String playlistName, String userId) {

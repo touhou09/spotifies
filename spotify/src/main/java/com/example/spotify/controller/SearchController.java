@@ -17,17 +17,17 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @GetMapping("/songs")
+    @GetMapping("/song")
     public List<SearchResult> searchSong(@RequestParam String keyword) {
         return searchService.searchSong(keyword);
     }
 
-    @GetMapping("/albums")
+    @GetMapping("/album")
     public List<SearchResult> searchAlbum(@RequestParam String keyword) {
         return searchService.searchAlbum(keyword);
     }
 
-    @GetMapping("/artists")
+    @GetMapping("/artist")
     public List<SearchResult> searchArtist(@RequestParam String keyword) {
         return searchService.searchArtist(keyword);
     }

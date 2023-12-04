@@ -1,6 +1,5 @@
 package com.example.spotify.repository;
 
-import com.example.spotify.model.Artist;
 import com.example.spotify.model.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

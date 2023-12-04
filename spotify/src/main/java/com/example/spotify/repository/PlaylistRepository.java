@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Repository
@@ -30,6 +31,20 @@ public class PlaylistRepository {
 
         List<Map<String, Object>> songs = jdbcTemplate.queryForList(getPlaylistSQL);
 
+
+
+
+        for (Map<String, Object> song : songs) {
+            BigDecimal durationBigDecimal = (BigDecimal) song.get("Duration");
+            int duration = durationBigDecimal.intValue();
+            if (accumulatedDuration + duration <= targetDuration) {
+                accumulatedDuration += duration;
+                songIDs.add((String) song.get("SongID"));
+            } else {
+                break;
+            }
+        }
+        /*
         for (Map<String, Object> song : songs) {
             int duration = (Integer) song.get("Duration");
             if (accumulatedDuration + duration <= targetDuration) {
@@ -38,7 +53,7 @@ public class PlaylistRepository {
             } else {
                 break;
             }
-        }
+        }*/
 
         int playlistID;
         while (true) {

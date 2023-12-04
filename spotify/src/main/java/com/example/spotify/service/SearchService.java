@@ -1,6 +1,5 @@
 package com.example.spotify.service;
 
-import com.example.spotify.model.Artist;
 import com.example.spotify.model.SearchResult;
 import com.example.spotify.model.User;
 import com.example.spotify.repository.SearchRepository;
@@ -26,7 +25,6 @@ public class SearchService {
     public List<SearchResult> searchArtist(String keyword) {
         return searchRepository.searchArtist(keyword);
     }
-
     public List<SearchResult> searchGenre(String genre) {
         return searchRepository.searchGenre(genre);
     }
@@ -34,5 +32,4 @@ public class SearchService {
     public List<User> searchUser(String keyword) {
         return UserRepository.searchUser(keyword);
     }
-
 }

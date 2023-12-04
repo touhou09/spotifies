@@ -18,15 +18,16 @@ public class ChartRepository {
 
     public List<Map<String, Object>> getTopSongs() {
         String selectTopSongsSQL = "SELECT Title, LikeCount FROM " +
-                "(SELECT s.Title, COUNT(*) as LikeCount " +
+                "(SELECT s.Title, COUNT(sl.SongID) as LikeCount " +
                 "FROM Songs_Liked sl " +
                 "JOIN Songs s ON sl.SongID = s.SongID " +
                 "GROUP BY s.Title " +
-                "ORDER BY COUNT(*) DESC) " +
-                "FETCH FIRST 10 ROWS ONLY";
+                "ORDER BY COUNT(sl.SongID) DESC) " +
+                "WHERE ROWNUM <= 10"; // Oracle 데이터베이스에 맞게 수정
 
         return jdbcTemplate.queryForList(selectTopSongsSQL);
     }
+
 
 
     public List<Map<String, Object>> getTopFollowed() {
