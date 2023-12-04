@@ -105,7 +105,7 @@ public class User {
         return this.subscriptionID;
     }
 
-    public void setAdmin(String subscriptionID) {
+    public void setSubscriptionID(String subscriptionID) {
         this.subscriptionID = subscriptionID;
     }
 
