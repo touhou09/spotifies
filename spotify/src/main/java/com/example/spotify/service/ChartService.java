@@ -16,9 +16,9 @@ public class ChartService {
         this.chartRepository = chartRepository;
     }
 
-    public List<Map<String, Object>> displayTopSongs(String timeFrame) {
-        String viewName = "TopSongsView_" + timeFrame;
-        return chartRepository.getTopSongs(viewName);
+    public List<Map<String, Object>> displayTopSongs() {
+
+        return chartRepository.getTopSongs();
     }
 
     public List<Map<String, Object>> displayTopFollowed() {

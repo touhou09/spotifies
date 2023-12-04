@@ -20,9 +20,9 @@ public class ChartController {
         this.chartService = chartService;
     }
 
-    @GetMapping("/top-songs/{timeFrame}")
-    public List<Map<String, Object>> getTopSongs(@PathVariable String timeFrame) {
-        return chartService.displayTopSongs(timeFrame);
+    @GetMapping("/top-songs")
+    public List<Map<String, Object>> getTopSongs() {
+        return chartService.displayTopSongs();
     }
 
     @GetMapping("/top-followed")

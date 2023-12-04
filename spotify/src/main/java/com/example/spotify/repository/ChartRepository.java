@@ -16,21 +16,18 @@ public class ChartRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Map<String, Object>> getTopSongs(String viewName) {
-        String createOrUpdateViewSQL = String.format(
-                "CREATE OR REPLACE VIEW %s AS " +
-                        "SELECT s.Title, COUNT(*) as LikeCount " +
-                        "FROM Songs_Liked sl " +
-                        "JOIN Songs s ON sl.SongID = s.SongID " +
-                        "GROUP BY s.Title " +
-                        "ORDER BY COUNT(*) DESC", viewName);
+    public List<Map<String, Object>> getTopSongs() {
+        String selectTopSongsSQL = "SELECT Title, LikeCount FROM " +
+                "(SELECT s.Title, COUNT(*) as LikeCount " +
+                "FROM Songs_Liked sl " +
+                "JOIN Songs s ON sl.SongID = s.SongID " +
+                "GROUP BY s.Title " +
+                "ORDER BY COUNT(*) DESC) " +
+                "FETCH FIRST 10 ROWS ONLY";
 
-        String selectFromViewSQL = "SELECT Title, LikeCount FROM " + viewName + " FETCH FIRST 10 ROWS ONLY";
-
-        jdbcTemplate.execute(createOrUpdateViewSQL);
-
-        return jdbcTemplate.queryForList(selectFromViewSQL);
+        return jdbcTemplate.queryForList(selectTopSongsSQL);
     }
+
 
     public List<Map<String, Object>> getTopFollowed() {
         String query = "SELECT A.Artist_Name, COUNT(F.UserID) AS FollowerCount " +
