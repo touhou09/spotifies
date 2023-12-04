@@ -12,18 +12,18 @@
 spring.datasource.url=jdbc:oracle:thin:@14.56.195.170:1521:orcl  
 spring.datasource.username=spotify  
 spring.datasource.password=oracle  
-spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver  
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
 
 - 외부 데이터베이스에 연결해서 사용했으므로 실제로는 url을 localhost로 수정해야한다
 
 # Flowchart
-ppt에 같이 제출된 flowchart는 녹색표시된 부분이 완성시킨 부분 
+ppt에 같이 제출된 flowchart는 녹색표시된 부분이 완성시킨 부분
 
 파란색은 하드코딩한 부분 검정색은 미구현의 부분 빨간색은 제대로 동작이 되지 않는 부분이다.
 
 # Demo link
 https://www.youtube.com/watch?v=pxGpzebD704
- 
+
 # 실행시 주의사항
 프로그램 실행시 http://localhost:8080/loginpage.html 페이지에서 시작한다.
 
@@ -35,84 +35,84 @@ https://www.youtube.com/watch?v=pxGpzebD704
 
 ## UserController
 * Base URL: `/users`
-    
+
     1. **Login**
         - Endpoint: `POST /login`
         - Parameters: `userName` (String), `password` (String)
         - Response:
             - Success (200 OK): User 객체
             - Failure (401 Unauthorized):
-    
+
     2. **Register User**
         - Endpoint: `POST /register`
         - Request Body: newUser (User 객체)
         - Response:
             - Success (201 Created): 등록된 User 객체
             - Failure (400 Bad Request):
-    
+
     3. **Update User**
         - Endpoint: `PUT /update`
         - Request Body: updatedUser (User 객체)
         - Response:
             - Success (200 OK): 갱신된 User 객체
             - Failure (400 Bad Request):
-    
+
     4. **Get User**
         - Endpoint: `GET /{userId}`
         - Parameters: `userId` (String)
         - Response: User 객체
-    
-    ## PlaylistController
+
+  ## PlaylistController
     * Base URL: `/playlist`
-    
+
     5. **Create Time Based Playlist**
         - Endpoint: `POST /randomcreate`
         - Parameters: `targetDuration` (int), `playlistName` (String), `userId` (String)
         - Response: 없음
-    
+
     6. **Create Empty Playlist**
         - Endpoint: `POST /create-empty`
         - Parameters: `playlistName` (String), `userId` (String)
         - Response: 없음
-    
+
     7. **Delete Playlist**
         - Endpoint: `DELETE /delete/{playlistId}`
         - Parameters: `playlistId` (int)
         - Response: 없음
-    
-    ## ChartController
+
+  ## ChartController
     * Base URL: `/charts`
-    
+
     8. **Get Top Songs**
         - Endpoint: `GET /top-songs/{timeFrame}`
         - Parameters: `timeFrame` (String)
         - Response: 가장 인기있는 노래 리스트 (Map 형태)
-    
+
     9. **Get Top Followed**
         - Endpoint: `GET /top-followed`
         - Response: 가장 많이 팔로우 받은 사용자 리스트 (Map 형태)
-    
-    ## SearchController
+
+  ## SearchController
     * Base URL: `/search`
-    
+
     1. **Search Song**
-       - Endpoint: `GET /song`
-       - Parameters: `keyword` (String)
-       - Response: 노래 검색 결과 List (SearchResult 객체를 항목으로 가짐)
-    
+        - Endpoint: `GET /song`
+        - Parameters: `keyword` (String)
+        - Response: 노래 검색 결과 List (SearchResult 객체를 항목으로 가짐)
+
     2. **Search Album**
-       - Endpoint: `GET /album`
-       - Parameters: `keyword` (String)
-       - Response: 앨범 검색 결과 List (SearchResult 객체를 항목으로 가짐)
-    
+        - Endpoint: `GET /album`
+        - Parameters: `keyword` (String)
+        - Response: 앨범 검색 결과 List (SearchResult 객체를 항목으로 가짐)
+
     3. **Search Artist**
-       - Endpoint: `GET /artist`
-       - Parameters: `keyword` (String)
-       - Response: 아티스트 검색 결과 List (SearchResult 객체를 항목으로 가짐)
-         
-       -> 아래와 같이 수정   
-    
-       - 노래 검색: /search/songs?keyword=<키워드>
-       - 앨범 검색: /search/albums?keyword=<키워드>
-       - 아티스트 검색: /search/artists?keyword=<키워드>
-       - 장르 검색: /search/genres?genre=<장르>
+        - Endpoint: `GET /artist`
+        - Parameters: `keyword` (String)
+        - Response: 아티스트 검색 결과 List (SearchResult 객체를 항목으로 가짐)
+
+       -> 아래와 같이 수정
+
+        - 노래 검색: /search/songs?keyword=<키워드>
+        - 앨범 검색: /search/albums?keyword=<키워드>
+        - 아티스트 검색: /search/artists?keyword=<키워드>
+        - 장르 검색: /search/genres?genre=<장르>
