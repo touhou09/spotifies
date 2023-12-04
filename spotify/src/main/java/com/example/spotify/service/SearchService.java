@@ -1,5 +1,6 @@
 package com.example.spotify.service;
 
+import com.example.spotify.model.Artist;
 import com.example.spotify.model.SearchResult;
 import com.example.spotify.repository.SearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,9 @@ public class SearchService {
     public List<SearchResult> searchArtist(String keyword) {
         return searchRepository.searchArtist(keyword);
     }
+
+    public List<SearchResult> searchGenre(String genre) {
+        return searchRepository.searchGenre(genre);
+    }
+
 }
