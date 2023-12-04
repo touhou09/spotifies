@@ -1,6 +1,7 @@
 package com.example.spotify.controller;
 
 import com.example.spotify.model.SearchResult;
+import com.example.spotify.model.User;
 import com.example.spotify.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,5 +35,10 @@ public class SearchController {
     @GetMapping("/genres")
     public List<SearchResult> searchGenre(@RequestParam String genre) {
         return searchService.searchGenre(genre);
+    }
+
+    @GetMapping("/users")
+    public List<User> searchUser(@RequestParam String keyword) {
+        return searchService.searchUser(keyword);
     }
 }

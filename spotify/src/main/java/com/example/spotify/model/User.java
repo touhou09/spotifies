@@ -12,7 +12,7 @@ public class User {
     private Date dateOfBirth;
     private String location;
     private String nationality;
-    private Boolean admin;
+    private String subscriptionID;
 
     // Constructor
     public User() {
@@ -25,7 +25,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.location = location;
         this.nationality = nationality;
-        this.admin = admin;
+        this.subscriptionID = subscriptionID;
     }
 
     // Getters and Setters
@@ -101,12 +101,12 @@ public class User {
         this.nationality = nationality;
     }
 
-    public Boolean getAdmin() {
-        return this.admin;
+    public String getSubscriptionID() {
+        return this.subscriptionID;
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setAdmin(String subscriptionID) {
+        this.subscriptionID = subscriptionID;
     }
 
 }
