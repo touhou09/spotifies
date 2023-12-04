@@ -21,6 +21,8 @@ ppt에 같이 제출된 flowchart는 녹색표시된 부분이 완성시킨 부�
 
 파란색은 하드코딩한 부분 검정색은 미구현의 부분 빨간색은 제대로 동작이 되지 않는 부분이다.
 
+# Demo link
+https://www.youtube.com/watch?v=pxGpzebD704
  
 # 실행시 주의사항
 프로그램 실행시 http://localhost:8080/loginpage.html 페이지에서 시작한다.
