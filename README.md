@@ -78,3 +78,10 @@
    - Endpoint: `GET /artist`
    - Parameters: `keyword` (String)
    - Response: 아티스트 검색 결과 List (SearchResult 객체를 항목으로 가짐)
+     
+   -> 아래와 같이 수정   
+
+   - 노래 검색: /search/songs?keyword=<키워드>
+   - 앨범 검색: /search/albums?keyword=<키워드>
+   - 아티스트 검색: /search/artists?keyword=<키워드>
+   - 장르 검색: /search/genres?genre=<장르>
